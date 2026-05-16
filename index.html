@@ -3293,13 +3293,9 @@
         <div class="bc-success-icon"><svg class="icon" viewBox="0 0 24 24" style="width:28px;height:28px;stroke:#fff;stroke-width:3"><path d="M5 12l5 5L20 7"/></svg></div>
         <h3 class="bc-success-title">予約を受け付けました</h3>
         <div class="bc-success-summary" id="bc-success-summary"></div>
-        <a class="bc-success-action primary" id="bc-meet-link" href="#" target="_blank" rel="noopener">
-          <svg class="icon" viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M17 10l4-2v8l-4-2z"/></svg>
-          <span>Google Meet ルームを開く</span>
-        </a>
-        <a class="bc-success-action" id="bc-cal-add" href="#" target="_blank" rel="noopener">
+        <a class="bc-success-action primary" id="bc-cal-add" href="#" target="_blank" rel="noopener">
           <svg class="icon" viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor"><use href="#i-calendar"/></svg>
-          <span>Google カレンダーに追加</span>
+          <span>Google カレンダーに追加する</span>
         </a>
         <p class="bc-success-note" id="bc-success-note"></p>
         <button type="button" class="bc-back" id="bc-reset">最初から</button>
@@ -3552,20 +3548,35 @@
       return new Promise((resolve, reject) => {
         const start = buildLocalDate(state.date.obj, state.time);
         const end = new Date(start.getTime() + SESSION_MINUTES * 60 * 1000);
-        const meetUrl = buildMeetUrl();
-        const calUrl = buildGoogleCalendarUrl(start, end, meetUrl);
+        const calUrl = buildGoogleCalendarUrl(start, end);
 
         const payload = {
           _subject: '【Banso AI】無料相談予約 ／ ' + state.company + ' ' + state.name + ' 様',
           _template: 'table',
           _captcha: 'false',
           _next: location.origin + (location.pathname || '/') + '#booking-thanks',
+          _autoresponse:
+            '【Banso AI】ご予約ありがとうございます\n\n' +
+            state.name + ' 様\n\n' +
+            'Banso AI（バンソウエーアイ）の氏家です。\n' +
+            'ご予約を受け付けました。内容をご確認ください。\n\n' +
+            '━━━━━━━━━━━━━━━━━━━━━\n' +
+            '■ ご予約内容\n' +
+            '日時　：' + state.date.display + '　' + state.time + '〜' + addMinutes(state.time, SESSION_MINUTES) + '\n' +
+            'お名前：' + state.name + '\n' +
+            '会社名：' + state.company + '\n' +
+            '━━━━━━━━━━━━━━━━━━━━━\n\n' +
+            '当日の Google Meet URL は、前日までに別途メールにてお送りします。\n\n' +
+            'ご不明な点はお気軽にご返信ください。\n' +
+            'よろしくお願いいたします。\n\n' +
+            '氏家\n' +
+            'Banso AI（バンソウエーアイ）\n' +
+            'Mail：ncgdpo@gmail.com',
+          email: state.email,
           '予約日時': state.date.display + '　' + state.time + '〜' + addMinutes(state.time, SESSION_MINUTES),
           'お名前': state.name,
           '会社名・屋号': state.company,
-          'メールアドレス': state.email,
           'ご相談内容': state.note || '（記入なし）',
-          '会議リンク (Jitsi)': meetUrl,
           'カレンダー追加URL': calUrl
         };
 
@@ -3611,15 +3622,8 @@
       });
     }
 
-    // ── 一意の会議室 ID 生成
-    function buildMeetUrl() {
-      const rand = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
-      const datePart = state.date.obj.getFullYear() + pad(state.date.obj.getMonth()+1) + pad(state.date.obj.getDate());
-      return 'https://meet.jit.si/BansoAI-' + datePart + '-' + rand + '#config.prejoinPageEnabled=false';
-    }
-
-    // ── Google Calendar 追加 URL を生成（保存時に Meet 自動付与）
-    function buildGoogleCalendarUrl(start, end, meetUrl) {
+    // ── Google Calendar 追加 URL を生成（Meet はカレンダー保存時に追加）
+    function buildGoogleCalendarUrl(start, end) {
       const fmt = (d) => d.getUTCFullYear() + pad(d.getUTCMonth()+1) + pad(d.getUTCDate())
         + 'T' + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + '00Z';
       const params = new URLSearchParams({
@@ -3632,9 +3636,7 @@
           '会社名: ' + state.company + '\n' +
           'メール: ' + state.email + '\n\n' +
           'ご相談内容:\n' + (state.note || '（記入なし）') + '\n\n' +
-          'オンライン会議リンク: ' + meetUrl + '\n\n' +
-          '※ Google Meet 会議リンクは「Google Meet ビデオ会議を追加」より発行可能です。',
-        location: meetUrl,
+          '※ 当日の Google Meet URL は前日までに氏家よりメールにてお送りします。',
         add: HOST_EMAIL + ',' + state.email
       });
       return 'https://calendar.google.com/calendar/render?' + params.toString();
@@ -3648,14 +3650,12 @@
     function renderSuccess(fallback) {
       const start = buildLocalDate(state.date.obj, state.time);
       const end = new Date(start.getTime() + SESSION_MINUTES * 60 * 1000);
-      const meetUrl = buildMeetUrl();
-      const calUrl = buildGoogleCalendarUrl(start, end, meetUrl);
+      const calUrl = buildGoogleCalendarUrl(start, end);
 
       document.getElementById('bc-success-summary').innerHTML =
         '<strong>' + state.date.display + '　' + state.time + '〜' + addMinutes(state.time, SESSION_MINUTES) + '</strong>' +
         state.company + ' ／ ' + state.name + ' 様';
 
-      document.getElementById('bc-meet-link').href = meetUrl;
       document.getElementById('bc-cal-add').href = calUrl;
 
       const noteEl = document.getElementById('bc-success-note');
@@ -3665,15 +3665,15 @@
           '&body=' + encodeURIComponent(
             '予約日時: ' + state.date.display + '　' + state.time + '〜' + addMinutes(state.time, SESSION_MINUTES) +
             '\nお名前: ' + state.name + '\n会社名: ' + state.company + '\nメール: ' + state.email +
-            '\nご相談内容: ' + (state.note || '（記入なし）') + '\n会議リンク: ' + meetUrl
+            '\nご相談内容: ' + (state.note || '（記入なし）')
           );
         noteEl.innerHTML =
           '通信エラーが発生しました。<br>' +
           'お手数ですが <a href="' + mailto + '" style="color:var(--blue);text-decoration:underline">こちら</a> から氏家へメールでご連絡ください。';
       } else {
         noteEl.innerHTML =
-          '<strong>' + state.email + '</strong> 宛に確認メールをお送りします。<br>' +
-          '当日は上記の「Google Meet ルーム」からご参加ください。';
+          '<strong>' + state.email + '</strong> 宛に確認メールをお送りしました。<br>' +
+          '当日の Google Meet URL は前日までに氏家よりお送りします。';
       }
     }
   })();
