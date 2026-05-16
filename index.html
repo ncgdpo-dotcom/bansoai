@@ -2042,14 +2042,18 @@
       font-weight: 700; letter-spacing: .06em;
     }
     .bc-date {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 2px;
       text-align: center;
-      font-size: 18px; font-weight: 800;
-      padding: 14px 0; border-radius: 12px;
+      font-weight: 800;
+      padding: 10px 0; border-radius: 12px;
       background: var(--bg);
       color: var(--text-muted);
       border: 1.5px solid transparent;
       transition: all .2s var(--ease);
     }
+    .bc-date-month { font-size: 10px; font-weight: 700; opacity: .65; line-height: 1; }
+    .bc-date-day   { font-size: 18px; font-weight: 800; line-height: 1; }
     .bc-date.avail {
       color: var(--navy);
       background: var(--white);
@@ -3399,7 +3403,7 @@
       dateBtn.className = 'bc-date avail';
       dateBtn.setAttribute('role', 'button');
       dateBtn.setAttribute('tabindex', '0');
-      dateBtn.textContent = d.getDate();
+      dateBtn.innerHTML = '<span class="bc-date-month">' + (d.getMonth()+1) + '月</span><span class="bc-date-day">' + d.getDate() + '</span>';
       dateBtn.dataset.dateObj = d.toISOString();
       dateBtn.dataset.display = (d.getMonth()+1) + '/' + d.getDate() + ' (' + DAY_NAMES[d.getDay()] + ')';
       dateBtn.addEventListener('click', () => selectDate(dateBtn, d));
