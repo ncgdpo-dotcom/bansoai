@@ -1599,6 +1599,16 @@
       gap: 16px;
       position: relative; z-index: 1;
     }
+    .pricing-grid-2 {
+      display: grid; grid-template-columns: 1fr 1.6fr;
+      gap: 24px; max-width: 900px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .plan-price-block { display: flex; flex-direction: column; gap: 8px; margin-bottom: 6px; }
+    .plan-price-row { display: flex; align-items: baseline; gap: 12px; }
+    .plan-price-label { font-size: 12px; color: var(--text-muted); font-weight: 700; letter-spacing: .06em; min-width: 54px; }
+    .plan-features-group { flex: 1; }
+    .plan-features-heading { font-size: 12px; font-weight: 800; color: var(--text-soft); letter-spacing: .06em; margin-bottom: 8px; }
     .pricing-card {
       background: var(--white);
       border: 1.5px solid var(--border-soft);
@@ -1714,6 +1724,7 @@
     }
     @media (max-width: 1100px) {
       .pricing-grid-5 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+      .pricing-grid-2 { grid-template-columns: 1fr; }
     }
 
     /* ─────────── 流れ ─────────── */
@@ -2690,23 +2701,19 @@
   <div class="hero-grid">
     <div class="hero-left">
       <div class="hero-badge" style="--delay:80ms">
-        <svg class="icon"><use href="#i-yen"/></svg>
-        <span><span class="yen">月9,800円〜</span> ／ 中小企業・個人事業主専門</span>
+        <svg class="icon"><use href="#i-users"/></svg>
+        <span>社員を雇う前に、外部AI担当者という選択肢</span>
       </div>
       <h1 class="hero-title" style="--delay:200ms">
-        AIの導入を、<br><span class="accent">誰でもできる<wbr>身近なものに</span>
+        AI担当者を雇う前に、<br><span class="accent">外部AI推進担当を<wbr>月20万円で。</span>
       </h1>
-      <p class="hero-sub" style="--delay:360ms">
-        業界最安水準・月9,800円から始められるAI導入伴走支援。<br>
-        契約縛りなし・まずは30分の無料相談からお気軽にどうぞ。
-      </p>
+
       <div class="hero-btns" style="--delay:500ms">
         <a href="https://timerex.net/s/ncgdpo_4a36/16dce047" class="btn btn-primary" target="_blank">
           無料相談を申し込む <svg class="icon"><use href="#i-arrow-right"/></svg>
         </a>
         <a href="#pricing" class="btn btn-ghost">料金を見る</a>
       </div>
-      <p class="hero-note" style="--delay:640ms">費用のご請求は一切ございません</p>
     </div>
 
     <!-- 動くブランドロゴ -->
@@ -2751,8 +2758,8 @@
       <span class="stat-label">相談実績</span>
     </div>
     <div class="stat-item" data-animate="fade-up" data-delay="80">
-      <span class="stat-prefix">月</span><span class="stat-num" data-count="9800">0</span><span class="stat-unit">円〜</span>
-      <span class="stat-label">スタート可能</span>
+      <span class="stat-prefix">月</span><span class="stat-num">20</span><span class="stat-unit">万円</span>
+      <span class="stat-label">外部AI担当者として稼働</span>
     </div>
     <div class="stat-item" data-animate="fade-up" data-delay="160">
       <span class="stat-num" data-count="10">0</span><span class="stat-unit">業種</span>
@@ -2770,23 +2777,38 @@
   <div class="problem-inner">
     <div class="section-head">
       <span class="eyebrow" data-animate="fade-left">PROBLEM</span>
-      <h2 class="section-title" data-animate="title-wipe" style="--anim-delay:0.15s">こんな課題、ありませんか？</h2>
+      <h2 class="section-title" data-animate="title-wipe" style="--anim-delay:0.15s">こんなお悩みはありませんか？</h2>
     </div>
     <div class="problem-cards">
       <div class="problem-card" data-animate="fade-up" data-delay="0">
         <div class="problem-icon"><svg class="icon"><use href="#i-search"/></svg></div>
-        <h3>AIって難しそう…</h3>
-        <p>「自分の仕事にAIが使えるのか」「何から学べばいいのか」わからないまま、時間だけが過ぎていく。</p>
+        <h3>ChatGPTを試したが、業務でどう使えばいいかわからない</h3>
+        <p>アカウントは作った。一度触った。でも「自分の仕事に使えるのか」がわからないまま止まっている。</p>
       </div>
       <div class="problem-card" data-animate="fade-up" data-delay="80">
-        <div class="problem-icon"><svg class="icon"><use href="#i-chart"/></svg></div>
-        <h3>何から始めればいいかわからない</h3>
-        <p>ChatGPTは試したけど「業務に使えない」「毎回同じところで詰まる」という状態が続いている。</p>
+        <div class="problem-icon"><svg class="icon"><use href="#i-users"/></svg></div>
+        <h3>社内にAIに詳しい担当者がいない</h3>
+        <p>誰かが旗振り役になれればいいが、全員が本業を抱えていて、AI推進を担える人材がいない。</p>
       </div>
       <div class="problem-card" data-animate="fade-up" data-delay="160">
-        <div class="problem-icon"><svg class="icon"><use href="#i-users"/></svg></div>
-        <h3>使いこなせるか不安</h3>
-        <p>ツールを導入しても定着しない。社内に詳しい人がいないので、誰かに継続的に支えてほしい。</p>
+        <div class="problem-icon"><svg class="icon"><use href="#i-chart"/></svg></div>
+        <h3>AIツールが多すぎて、何を選べばいいかわからない</h3>
+        <p>ChatGPT、Claude、Gemini、Notion AI…選択肢が多すぎて、何が自社に合うのか判断できない。</p>
+      </div>
+      <div class="problem-card" data-animate="fade-up" data-delay="0">
+        <div class="problem-icon"><svg class="icon"><use href="#i-target"/></svg></div>
+        <h3>社員にAIを使ってほしいが、活用が定着しない</h3>
+        <p>研修を受けさせたり、ツールを入れてみたが、気づけば誰も使っていない。定着が難しい。</p>
+      </div>
+      <div class="problem-card" data-animate="fade-up" data-delay="80">
+        <div class="problem-icon"><svg class="icon"><use href="#i-document"/></svg></div>
+        <h3>業務効率化したいが、どの業務から始めるべきかわからない</h3>
+        <p>AIで効率化できそうとは思っているが、自社のどの業務から手をつければいいか整理できていない。</p>
+      </div>
+      <div class="problem-card" data-animate="fade-up" data-delay="160">
+        <div class="problem-icon"><svg class="icon"><use href="#i-chat-heart"/></svg></div>
+        <h3>AI人材を採用するほどではないが、相談できる相手がほしい</h3>
+        <p>専任を雇うコストはかけられない。でも、気軽に相談できる専門家が社外にいてほしい。</p>
       </div>
     </div>
 
@@ -2829,29 +2851,29 @@
     <div class="section-head center">
       <span class="eyebrow" data-animate="fade-up">SERVICE</span>
       <h2 class="section-title" data-animate="title-wipe" style="--anim-delay:0.15s">Banso AIとは</h2>
-      <p class="section-sub" data-animate="fade-up" data-delay="200">あなたの業務に合わせて、AIを一緒に育てます。<br>「導入して終わり」ではなく、定着・活用まで伴走します。</p>
+      <p class="section-sub" data-animate="fade-up" data-delay="200">AIツールをただ紹介するサービスではありません。<br>御社の業務内容や課題をヒアリングしたうえで、AIを活用できる業務を洗い出し、実際に使えるプロンプトやツール、運用方法まで整理します。<br>社内にAIに詳しい人材がいない企業でも、外部のAI推進担当を持つように、毎月AI活用を前に進められます。</p>
     </div>
     <div class="about-layout">
       <div class="about-steps">
         <div class="about-step" data-animate="fade-up" data-delay="0">
           <div class="step-num">01</div>
           <div>
-            <h3>業務分析・設計</h3>
-            <p>現状の業務フローをヒアリングし、AI活用で効率化できるポイントを特定。最適な活用スキームを設計します。</p>
+            <h3>業務ヒアリング・AI活用診断</h3>
+            <p>御社の業務内容・課題・体制をヒアリングし、AIを活用できる業務を洗い出します。優先テーマの選定と初期ロードマップの作成まで含みます（初期費用に含む）。</p>
           </div>
         </div>
         <div class="about-step" data-animate="fade-up" data-delay="100">
           <div class="step-num">02</div>
           <div>
-            <h3>ツール導入支援</h3>
-            <p>ChatGPT・Claude・各種自動化ツールの導入・設定を代行。使い方のレクチャーまでワンストップで対応します。</p>
+            <h3>毎月の活用テーマ設計と実装支援</h3>
+            <p>月ごとに御社専用のAI活用テーマを設計し、プロンプト作成・ツール選定・社内運用ルールの整理まで実務で使える形に落とし込みます（月額に含む）。</p>
           </div>
         </div>
         <div class="about-step" data-animate="fade-up" data-delay="200">
           <div class="step-num">03</div>
           <div>
-            <h3>伴走・定着サポート</h3>
-            <p>導入後も月次相談・チャットで継続サポート。現場に合わせて改善を重ね、AIが本当に使われる状態を目指します。</p>
+            <h3>月2回のMTGで前進し続ける</h3>
+            <p>月2回のオンラインミーティングで進捗を確認し、業務別のAI活用アイデアを提案。毎月必ず前に進む状態を維持します。</p>
           </div>
         </div>
       </div>
@@ -2891,20 +2913,20 @@
   <div class="container">
     <div class="section-head center">
       <span class="eyebrow" data-animate="fade-up">WHY BANSO AI</span>
-      <h2 class="section-title" data-animate="title-wipe" style="--anim-delay:0.15s">大手AIコンサルでは実現できない、<br>「個人だからこそ」の伴走支援</h2>
-      <p class="section-sub" data-animate="fade-up" data-delay="200">中小企業・個人事業主のために設計された、4つの差別化ポイント</p>
+      <h2 class="section-title" data-animate="title-wipe" style="--anim-delay:0.15s">社員を雇う前に、<br>外部AI担当者という選択肢</h2>
+      <p class="section-sub" data-animate="fade-up" data-delay="200">中小企業・士業・クリニックのために設計された、4つの差別化ポイント</p>
     </div>
     <div class="why-layout">
       <div class="why-grid">
         <div class="why-card" data-animate="fade-up" data-delay="0">
           <div class="why-icon"><svg class="icon"><use href="#i-yen"/></svg></div>
-          <h3>業界最安水準の月額9,800円〜</h3>
-          <p>大手AIコンサルは月10〜30万円が相場。Banso AIは<span class="highlight">月9,800円から始められる</span>業界トップクラスの低価格を実現。</p>
+          <h3>正社員採用より賢いコスト配分</h3>
+          <p>AI人材を正社員で雇うと、給与・社会保険・採用費を合わせて<span class="highlight">月50〜70万円が相場</span>。Banso AIなら初期費用10万円・月額20万円で専任のAI担当者として稼働します。</p>
         </div>
         <div class="why-card" data-animate="fade-up" data-delay="60">
           <div class="why-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
-          <h3>契約期間の縛りなし</h3>
-          <p>年間契約・最低利用期間の設定なし。<span class="highlight">いつでも解約OK</span>で、必要なときだけ無理なくご利用いただけます。</p>
+          <h3>最低3ヶ月推奨・柔軟に継続</h3>
+          <p>AI活用が定着するまで一定の期間が必要なため、<span class="highlight">3ヶ月間の伴走を推奨</span>しています。それ以降は継続・終了いずれでもご相談いただけます。</p>
         </div>
         <div class="why-card" data-animate="fade-up" data-delay="120">
           <div class="why-icon"><svg class="icon"><use href="#i-chat-heart"/></svg></div>
@@ -2968,16 +2990,17 @@
         <thead>
           <tr>
             <th></th>
-            <th>大手AIコンサル</th>
-            <th>一般的なAI導入支援</th>
+            <th>AI人材を正社員採用</th>
+            <th>フリーランス活用</th>
             <th class="col-banso-head">Banso AI</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>月額料金（最安）</td><td class="price-cell">30万円〜</td><td class="price-cell">10万円〜</td><td class="col-banso price-cell">9,800円〜</td></tr>
-          <tr><td>契約期間の縛り</td><td>1年〜</td><td>3〜6ヶ月</td><td class="col-banso yes">なし</td></tr>
-          <tr><td>代表/トップが直接対応</td><td><span class="no">×</span></td><td>△</td><td class="col-banso yes">○</td></tr>
-          <tr><td>業種特化の事例</td><td>汎用的</td><td>限定的</td><td class="col-banso yes">10業種特化</td></tr>
+          <tr><td>月間コスト</td><td class="price-cell">50〜70万円〜</td><td class="price-cell">30〜50万円</td><td class="col-banso price-cell">20万円</td></tr>
+          <tr><td>初期コスト</td><td>採用費30〜100万円</td><td>選定・契約コスト</td><td class="col-banso yes">10万円</td></tr>
+          <tr><td>即稼働までの期間</td><td>習熟まで3〜6ヶ月</td><td>すり合わせ必要</td><td class="col-banso yes">最短1ヶ月</td></tr>
+          <tr><td>業種ノウハウ</td><td>要研修</td><td>まちまち</td><td class="col-banso yes">10業種特化</td></tr>
+          <tr><td>代表が直接対応</td><td><span class="no">×</span></td><td>△</td><td class="col-banso yes">○</td></tr>
         </tbody>
       </table>
     </div>
@@ -3078,12 +3101,12 @@
   <div class="container">
     <div class="section-head center">
       <span class="eyebrow" data-animate="fade-up">PRICING</span>
-      <h2 class="section-title" data-animate="title-wipe" style="--anim-delay:0.15s">業界最安水準で、無理なく始められる料金プラン</h2>
-      <p class="section-sub" data-animate="fade-up" data-delay="200">大手AIコンサルは月10〜30万円が相場のなか、Banso AIは<strong style="color:var(--navy)">月9,800円から</strong>。</p>
+      <h2 class="section-title" data-animate="title-wipe" style="--anim-delay:0.15s">シンプルな料金体系</h2>
+      <p class="section-sub" data-animate="fade-up" data-delay="200">正社員を雇う前に、まず外部AI担当者という選択肢を。</p>
     </div>
-    <div class="pricing-grid-5">
+    <div class="pricing-grid-2">
       <div class="pricing-card" data-animate="fade-up" data-delay="0">
-        <div class="plan-name">FREE</div>
+        <div class="plan-name">無料相談</div>
         <div class="plan-price">0<span>円</span></div>
         <div class="plan-desc">まずはここから。</div>
         <ul class="plan-features">
@@ -3092,56 +3115,45 @@
           <li><svg class="icon"><use href="#i-check"/></svg>AI活用の可能性をご提案</li>
           <li><svg class="icon"><use href="#i-check"/></svg>費用・契約不要</li>
         </ul>
-        <a href="https://timerex.net/s/ncgdpo_4a36/16dce047" class="plan-cta" target="_blank">無料相談 <svg class="icon"><use href="#i-arrow-right"/></svg></a>
+        <a href="https://timerex.net/s/ncgdpo_4a36/16dce047" class="plan-cta" target="_blank">無料相談を申し込む <svg class="icon"><use href="#i-arrow-right"/></svg></a>
       </div>
-      <div class="pricing-card" data-animate="fade-up" data-delay="80">
-        <div class="plan-name">STARTER</div>
-        <div class="plan-price"><span data-count="9800">9,800</span><span>円/月</span></div>
-        <div class="plan-desc">まずは試してみたい方に。</div>
-        <ul class="plan-features">
-          <li><svg class="icon"><use href="#i-check"/></svg>月1回相談（30分）</li>
-          <li><svg class="icon"><use href="#i-check"/></svg>チャット質問（月5件）</li>
-          <li><svg class="icon"><use href="#i-check"/></svg>AI活用ミニ提案書</li>
-        </ul>
-        <a href="https://timerex.net/s/ncgdpo_4a36/16dce047" class="plan-cta" target="_blank">申し込む <svg class="icon"><use href="#i-arrow-right"/></svg></a>
-      </div>
-      <div class="pricing-card featured" data-animate="fade-up" data-delay="160">
-        <div class="featured-badge">人気No.1</div>
-        <div class="plan-name">LIGHT</div>
-        <div class="plan-price"><span data-count="29800">29,800</span><span>円/月</span></div>
-        <div class="plan-desc">本格的に始めたい方に。</div>
-        <ul class="plan-features">
-          <li><svg class="icon"><use href="#i-check"/></svg>月1回相談（60分）</li>
-          <li><svg class="icon"><use href="#i-check"/></svg>チャット質問（無制限）</li>
-          <li><svg class="icon"><use href="#i-check"/></svg>推奨ツール選定</li>
-        </ul>
-        <a href="https://timerex.net/s/ncgdpo_4a36/16dce047" class="plan-cta" target="_blank">申し込む <svg class="icon"><use href="#i-arrow-right"/></svg></a>
-      </div>
-      <div class="pricing-card" data-animate="fade-up" data-delay="240">
-        <div class="plan-name">STANDARD</div>
-        <div class="plan-price"><span data-count="49800">49,800</span><span>円/月</span></div>
-        <div class="plan-desc">業務を本格改革したい方に。</div>
-        <ul class="plan-features">
-          <li><svg class="icon"><use href="#i-check"/></svg>ライトの全内容</li>
-          <li><svg class="icon"><use href="#i-check"/></svg>月2回相談（各60分）</li>
-          <li><svg class="icon"><use href="#i-check"/></svg>AI・ツールの実装サポート</li>
-        </ul>
-        <a href="https://timerex.net/s/ncgdpo_4a36/16dce047" class="plan-cta" target="_blank">申し込む <svg class="icon"><use href="#i-arrow-right"/></svg></a>
-      </div>
-      <div class="pricing-card" data-animate="fade-up" data-delay="320">
-        <div class="plan-name">FULL</div>
-        <div class="plan-price"><span data-count="98000">98,000</span><span>円/月</span></div>
-        <div class="plan-desc">フルコミットで伴走希望の方に。</div>
-        <ul class="plan-features">
-          <li><svg class="icon"><use href="#i-check"/></svg>スタンダードの全内容</li>
-          <li><svg class="icon"><use href="#i-check"/></svg>無制限相談（チャット・電話）</li>
-          <li><svg class="icon"><use href="#i-check"/></svg>優先対応</li>
-        </ul>
+      <div class="pricing-card featured" data-animate="fade-up" data-delay="120">
+        <div class="featured-badge">AI活用伴走プラン</div>
+        <div class="plan-price-block">
+          <div class="plan-price-row">
+            <span class="plan-price-label">初期費用</span>
+            <span class="plan-price">100,000<span>円</span></span>
+          </div>
+          <div class="plan-price-row">
+            <span class="plan-price-label">月額</span>
+            <span class="plan-price">200,000<span>円/月</span></span>
+          </div>
+        </div>
+        <div class="plan-desc">最低3ヶ月推奨 ／ 外部AI担当者として稼働</div>
+        <div class="plan-features-group">
+          <p class="plan-features-heading">初期費用に含まれる内容</p>
+          <ul class="plan-features">
+            <li><svg class="icon"><use href="#i-check"/></svg>初回ヒアリング</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>AI活用可能性診断</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>優先的に取り組む活用テーマの選定</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>初期ロードマップ作成</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>推奨AIツールの整理</li>
+          </ul>
+          <p class="plan-features-heading" style="margin-top:16px">月額に含まれる内容</p>
+          <ul class="plan-features">
+            <li><svg class="icon"><use href="#i-check"/></svg>月2回のオンラインミーティング</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>業務別AI活用アイデアの提案</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>プロンプト作成・改善</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>AIツール選定アドバイス</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>社内運用ルールの整理</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>月次振り返り</li>
+          </ul>
+        </div>
         <a href="https://timerex.net/s/ncgdpo_4a36/16dce047" class="plan-cta" target="_blank">申し込む <svg class="icon"><use href="#i-arrow-right"/></svg></a>
       </div>
     </div>
     <p class="pricing-note">
-      単発コンサル（60分）9,800円 ／ ツール導入設定代行 19,800円〜
+      ご不明な点はまず無料相談でご確認いただけます。
     </p>
   </div>
 </section>
