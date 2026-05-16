@@ -914,10 +914,10 @@
     .problem-card {
       background: rgba(255,255,255,.92);
       backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-soft);
       border-radius: var(--radius-card);
-      padding: 42px 34px;
-      box-shadow: var(--shadow-card);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-soft);
       transition: transform var(--d-fast) var(--ease), box-shadow var(--d-fast) var(--ease), border-color var(--d-fast) var(--ease);
       position: relative; overflow: hidden;
       display: flex; flex-direction: column;
@@ -930,9 +930,9 @@
       transition: transform var(--d-normal) var(--ease);
     }
     .problem-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-card-hover);
-      border-color: rgba(232,180,55,.5);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+      border-color: rgba(232,180,55,.45);
     }
     .problem-card:hover::before { transform: scaleX(1); }
     .problem-icon {
@@ -955,7 +955,8 @@
       color: var(--text);
       line-height: 1.88;
     }
-    @media (max-width: 900px) { .problem-cards { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { .problem-cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .problem-cards { grid-template-columns: 1fr; } }
 
     /* Problem 用モック（中央寄せ・少し小ぶり） */
     .problem-mockup {
@@ -1497,12 +1498,14 @@
       text-align: left; font-weight: 700; color: var(--navy);
       background: var(--bg);
     }
-    .comparison-table .col-banso { background: rgba(232,180,55,.06); }
+    .comparison-table .col-banso { background: rgba(232,180,55,.09); }
     .comparison-table .col-banso-head {
       background: linear-gradient(180deg, var(--gold-2) 0%, var(--gold) 100%) !important;
       color: var(--navy) !important;
       font-weight: 800;
     }
+    .comparison-table tbody tr:nth-child(even) td:not(.col-banso) { background: rgba(47,103,216,.025); }
+    .comparison-table tbody tr:nth-child(even) td:first-child { background: rgba(47,103,216,.045); }
     .comparison-table .yes { color: var(--gold-deep); font-weight: 800; font-size: 1.1rem; }
     .comparison-table .no  { color: #b8c0d4; }
     .comparison-table .price-cell { font-weight: 700; color: var(--navy); }
@@ -1604,11 +1607,14 @@
       gap: 24px; max-width: 900px; margin: 0 auto;
       position: relative; z-index: 1;
     }
-    .plan-price-block { display: flex; flex-direction: column; gap: 8px; margin-bottom: 6px; }
-    .plan-price-row { display: flex; align-items: baseline; gap: 12px; }
-    .plan-price-label { font-size: 12px; color: var(--text-muted); font-weight: 700; letter-spacing: .06em; min-width: 54px; }
+    .plan-price-block { display: flex; flex-direction: column; gap: 0; margin-bottom: 18px; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+    .plan-price-item { display: flex; flex-direction: column; gap: 4px; padding: 14px 0; }
+    .plan-price-item + .plan-price-item { border-top: 1px solid var(--border-soft); }
+    .plan-price-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--text-muted); text-transform: uppercase; }
+    .plan-price-init { font-size: clamp(22px, 2.2vw, 28px) !important; font-weight: 800; color: var(--text-soft) !important; letter-spacing: -0.02em; }
+    .plan-price-main { color: var(--gold-deep) !important; }
     .plan-features-group { flex: 1; }
-    .plan-features-heading { font-size: 12px; font-weight: 800; color: var(--text-soft); letter-spacing: .06em; margin-bottom: 8px; }
+    .plan-features-heading { font-size: 12px; font-weight: 800; color: var(--navy); letter-spacing: .05em; margin-bottom: 10px; padding: 6px 10px; background: var(--blue-faint); border-left: 2px solid var(--blue); border-radius: 0 6px 6px 0; }
     .pricing-card {
       background: var(--white);
       border: 1.5px solid var(--border-soft);
@@ -1724,6 +1730,8 @@
     }
     @media (max-width: 1100px) {
       .pricing-grid-5 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    }
+    @media (max-width: 760px) {
       .pricing-grid-2 { grid-template-columns: 1fr; }
     }
 
@@ -2855,7 +2863,9 @@
     <div class="section-head center">
       <span class="eyebrow" data-animate="fade-up">SERVICE</span>
       <h2 class="section-title" data-animate="title-wipe" style="--anim-delay:0.15s">Banso AIとは</h2>
-      <p class="section-sub" data-animate="fade-up" data-delay="200">AIツールをただ紹介するサービスではありません。<br>御社の業務内容や課題をヒアリングしたうえで、AIを活用できる業務を洗い出し、実際に使えるプロンプトやツール、運用方法まで整理します。<br>社内にAIに詳しい人材がいない企業でも、外部のAI推進担当を持つように、毎月AI活用を前に進められます。</p>
+      <p class="section-sub" data-animate="fade-up" data-delay="200">AIツールをただ紹介するサービスではありません。</p>
+      <p class="section-sub" data-animate="fade-up" data-delay="280" style="margin-top:12px">御社の業務内容や課題をヒアリングしたうえで、AIを活用できる業務を洗い出し、実際に使えるプロンプトやツール、運用方法まで整理します。</p>
+      <p class="section-sub" data-animate="fade-up" data-delay="340" style="margin-top:12px">社内にAIに詳しい人材がいない企業でも、外部のAI推進担当を持つように、毎月AI活用を前に進められます。</p>
     </div>
     <div class="about-layout">
       <div class="about-steps">
@@ -3124,13 +3134,13 @@
       <div class="pricing-card featured" data-animate="fade-up" data-delay="120">
         <div class="featured-badge">AI活用伴走プラン</div>
         <div class="plan-price-block">
-          <div class="plan-price-row">
-            <span class="plan-price-label">初期費用</span>
-            <span class="plan-price">100,000<span>円</span></span>
+          <div class="plan-price-item">
+            <span class="plan-price-label">初期費用（初回のみ）</span>
+            <div class="plan-price plan-price-init">100,000<span>円</span></div>
           </div>
-          <div class="plan-price-row">
+          <div class="plan-price-item">
             <span class="plan-price-label">月額</span>
-            <span class="plan-price">200,000<span>円/月</span></span>
+            <div class="plan-price plan-price-main">200,000<span>円/月</span></div>
           </div>
         </div>
         <div class="plan-desc">最低3ヶ月推奨 ／ 外部AI担当者として稼働</div>
